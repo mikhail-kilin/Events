@@ -1,0 +1,40 @@
+.table-header {
+	text-align: center;
+}
+
+.day {
+	width: 50px;
+	line-height: 40px;
+	text-align: center;
+
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 10px;
+	border-color: #1E90FF;
+}
+
+.empty {
+	visibility: hidden;
+}
+
+.has-events {
+	background-color: #ADFF2F;
+}
+
+.today {
+	border-width: 4px;
+}
+
+.center {
+    text-align: center;
+}
+
+.calendar-a:hover {
+    color: black;
+    font-size: large;
+
+}
+
+.calendar-a {
+    color: black;
+}

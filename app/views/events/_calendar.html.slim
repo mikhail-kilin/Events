@@ -1,0 +1,47 @@
+.calendar
+  h1.center #{@date.strftime("%B %Y")}
+
+  table class="table"
+    thead
+      tr
+        th class="table-header" scope="col"Sun
+        th class="table-header" scope="col"Mon
+        th class="table-header" scope="col"Tue
+        th class="table-header" scope="col"Wed
+        th class="table-header" scope="col"Thu
+        th class="table-header" scope="col"Fri
+        th class="table-header" scope="col"Sat
+    tbody class="table-borderless"
+      - today = Date.today
+      - k = 1
+      - i = 0
+
+      - 6.times do
+        tr
+          - 7.times do
+            - if k <= @count_of_days && i >= @first_day_of_week
+              - if @date.month == today.month && @date.year == today.year && k == today.day
+                td
+                  = link_to by_date_events_path(year: @date.year, month: @date.month, day: k), class: "calendar-a" do
+                    div class = "day today"
+                      = k
+              - else
+                td
+                  = link_to by_date_events_path(year: @date.year, month: @date.month, day: k), class: "calendar-a" do
+                    div class = "day"
+                      = k
+              - k = k + 1
+            - else
+              td
+                div class = "day empty"
+                - i = i + 1
+  .row
+    .col-2
+      - prev_date = @date.prev_month
+      = button_to 'previous', by_month_events_path(year: prev_date.year, month: prev_date.month),
+              method: :get, class: "btn btn-primary"
+
+    div class = "col-2 offset-8"
+      - next_date = @date.next_month
+      = button_to 'previous', by_month_events_path(year: next_date.year, month: next_date.month),
+              method: :get, class: "btn btn-primary"
