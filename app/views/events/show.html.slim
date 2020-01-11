@@ -1,0 +1,14 @@
+.event_title
+  h1
+    = @event.title
+.event_content
+  p
+    = @event.content
+.time_of_event
+  strong Time of event: #{@event.time_of_event.strftime("%d-%m-%Y %H:%M")}
+.period
+  strong Period: #{@event.period}
+
+= link_to 'Edit', edit_event_path(@event)
+= " | "
+= link_to "Back", :back

@@ -1,0 +1,20 @@
+= form_with(model: event, local: true) do |form|
+  .form-group
+    = form.label :title
+    = form.text_field :title, class: "form-control"
+
+  .form-group
+    = form.label :content
+    = form.text_area :content, class: "form-control"
+
+  .form-group
+    = form.label :time_of_event
+    div
+      = form.datetime_select :time_of_event, class: "form-control"
+
+  .form-group
+    = form.label :period
+    = form.select :period, %w(one-time daily weekly monthly annual), {}, { :class => "form-control" }
+
+  .form-group
+    = form.submit class: "btn btn-primary", id: "Submit"

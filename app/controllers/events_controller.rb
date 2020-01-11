@@ -2,6 +2,8 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def by_date
+    @date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+    @events = Event.search(@date).order(:time_of_event)
   end
 
   def by_month
@@ -13,11 +15,9 @@ class EventsController < ApplicationController
     render :index
   end
 
-
   def index
-    @date = Date.today
-    @count_of_days = Time.days_in_month(@date.month, @date.year)
-    @first_day_of_week = Date.new(@date.year, @date.month, 1).wday
+    date = Date.today
+    redirect_to by_month_events_url(month: date.month, year: date.year)
   end
 
   def show
@@ -25,6 +25,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @event.time_of_event = Date.today.at_beginning_of_day
   end
 
   def edit
