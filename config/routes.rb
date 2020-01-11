@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root to: "pages#welcome"
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
+
+  get 'user', to: "pages#user", as: 'user'
 
   resources :events do
     collection do

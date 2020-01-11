@@ -1,0 +1,6 @@
+- if @user.name.presence && @user.last_name.presence
+  .name
+    h2 <strong> Name: </strong> #{@user.name} #{@user.last_name}
+.email <strong> Email: </strong> #{@user.email}
+
+= button_to 'Edit user', edit_user_registration_path(@user), method: 'get', class: "btn btn-primary"

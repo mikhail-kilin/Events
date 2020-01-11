@@ -1,0 +1,10 @@
+.container
+  ul class="nav nav-tabs" id="myTab" role="tablist"
+    - if user_signed_in?
+      li.nav-item
+        = link_to "All Tasks", events_path, class: "nav-link active"
+      li.nav-item
+        = link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link", id: "Sign out"
+    - else
+      li.nav-item
+        = link_to "Sign In", new_user_session_path, class: "nav-link", id: "Sign in"
