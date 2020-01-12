@@ -10,4 +10,6 @@ class Event < ApplicationRecord
   scope :search_monthly, ->(date) { where("extract(DAY from time_of_event) = ? AND period = 'monthly'", date.day) }
   scope :search_annual, ->(date) { where("extract(MONTH from time_of_event) = ? AND extract(DAY from time_of_event) = ? AND period = 'annual'", date.month, date.day) }
   scope :search, ->(date) { search_by_date(date).or search_daily.or search_weekly(date).or search_monthly(date).or search_annual(date) }
+
+  belongs_to :user
 end

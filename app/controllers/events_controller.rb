@@ -4,15 +4,22 @@ class EventsController < ApplicationController
 
   def by_date
     @date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
-    @events = Event.search(@date).order(:time_of_event)
+    if params[:group] == 'all'
+      @events = Event.search(@date).order(:time_of_event)
+    else
+      @events = current_user.events.search(@date).order(:time_of_event)
+    end
   end
 
   def by_month
-    year = params[:year].to_i
-    month = params[:month].to_i
+    year = params[:year].nil? ? Date.today.year : params[:year].to_i
+    month = params[:month].nil? ? Date.today.month : params[:month].to_i
     @date = Date.new(year, month, 1)
     @count_of_days = Time.days_in_month(month, year)
     @first_day_of_week = @date.wday
+    if params[:group] == 'all'
+      @group = :all
+    end
     render :index
   end
 
@@ -25,7 +32,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    @event = current_user.events.new
     @event.time_of_event = Date.today.at_beginning_of_day
   end
 
@@ -33,7 +40,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = current_user.events.new(event_params)
 
     if @event.save
       redirect_to @event, notice: 'Event was successfully created.'
@@ -63,4 +70,5 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:title, :content, :time_of_event, :period)
     end
+
 end

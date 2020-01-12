@@ -1,3 +1,8 @@
-= render 'calendar'
+- if @group == :all
+  - content_for :all_calendar_link do
+    = "active"
+- else
+  - content_for :my_calendar_link do
+    = "active"
 
-= link_to 'New Event', new_event_path
+= render 'calendar'

@@ -22,14 +22,24 @@
             - if k <= @count_of_days && i >= @first_day_of_week
               - if @date.month == today.month && @date.year == today.year && k == today.day
                 td
-                  = link_to by_date_events_path(year: @date.year, month: @date.month, day: k), class: "calendar-a" do
-                    div class = "day today"
-                      = k
+                  - if @group == :all
+                    = link_to by_date_events_path(group: :all, year: @date.year, month: @date.month, day: k), class: "calendar-a" do
+                      div class = "day today"
+                        = k
+                  - else
+                    = link_to by_date_events_path(year: @date.year, month: @date.month, day: k), class: "calendar-a" do
+                      div class = "day today"
+                        = k
               - else
                 td
-                  = link_to by_date_events_path(year: @date.year, month: @date.month, day: k), class: "calendar-a" do
-                    div class = "day"
-                      = k
+                  - if @group == :all
+                    = link_to by_date_events_path(group: :all, year: @date.year, month: @date.month, day: k), class: "calendar-a", group: :all do
+                      div class = "day"
+                        = k
+                  - else
+                    = link_to by_date_events_path(year: @date.year, month: @date.month, day: k), class: "calendar-a" do
+                      div class = "day"
+                        = k
               - k = k + 1
             - else
               td
@@ -38,10 +48,14 @@
   .row
     .col-2
       - prev_date = @date.prev_month
-      = button_to 'previous', by_month_events_path(year: prev_date.year, month: prev_date.month),
-              method: :get, class: "btn btn-primary"
+      - if @group == :all
+        = link_to 'previous', by_month_events_path(group: :all, year: prev_date.year, month: prev_date.month), class: "btn btn-primary calendar-btn"
+      - else
+        = link_to 'previous', by_month_events_path(year: prev_date.year, month: prev_date.month), class: "btn btn-primary calendar-btn"
 
-    div class = "col-2 offset-8"
+    div class = "col-2 offset-7"
       - next_date = @date.next_month
-      = button_to 'previous', by_month_events_path(year: next_date.year, month: next_date.month),
-              method: :get, class: "btn btn-primary"
+      - if @group == :all
+        = link_to 'next', by_month_events_path(group: :all, year: next_date.year, month: next_date.month), class: "btn btn-primary calendar-btn"
+      - else
+        = link_to 'next', by_month_events_path(year: next_date.year, month: next_date.month), class: "btn btn-primary calendar-btn"

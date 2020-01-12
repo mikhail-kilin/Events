@@ -1,3 +1,6 @@
+- content_for :profile_link do
+  = "active"
+
 - if @user.name.presence && @user.last_name.presence
   .name
     h2 <strong> Name: </strong> #{@user.name} #{@user.last_name}

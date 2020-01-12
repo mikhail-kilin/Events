@@ -6,6 +6,13 @@ hr
       - if event.content.presence
         .task-preview
           = truncate(event.content, length: 64)
-=> link_to 'Edit', edit_event_path(event)
-=> link_to 'Destroy', event, method: :delete, data: {confirm: 'Are you sure?'}
+      .host
+        = "Created by: "
+        -if event.user.name.presence && event.user.last_name.presence
+          = "#{event.user.name} #{event.user.last_name}"
+        -else
+          = event.user.email
+- if EventPolicy.new(event, current_user).can_use?
+  => link_to 'Edit', edit_event_path(event)
+  => link_to 'Destroy', event, method: :delete, data: {confirm: 'Are you sure?'}
 hr
