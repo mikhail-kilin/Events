@@ -3,7 +3,11 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def by_date
-    @date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+    begin
+      @date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+    rescue
+      render file: "#{Rails.root}/public/404.html", layout: false, :status => 404 and return
+    end
     if params[:group] == 'all'
       @events = Event.search(@date).order(:time_of_event)
     else
@@ -14,7 +18,11 @@ class EventsController < ApplicationController
   def by_month
     year = params[:year].nil? ? Date.today.year : params[:year].to_i
     month = params[:month].nil? ? Date.today.month : params[:month].to_i
-    @date = Date.new(year, month, 1)
+    begin
+      @date = Date.new(year, month, 1)
+    rescue
+      render file: "#{Rails.root}/public/404.html", layout: false, :status => 404 and return
+    end
     @count_of_days = Time.days_in_month(month, year)
     @first_day_of_week = @date.wday
     if params[:group] == 'all'

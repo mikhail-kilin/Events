@@ -7,7 +7,6 @@
         = link_to "My Calendar", events_path, class: "nav-link #{ yield :my_calendar_link }"
       li.nav-item
         = link_to "General Calendar", default_by_month_events_path(group: :all), class: "nav-link #{ yield :all_calendar_link }"
-        - puts yield :all_calendar_link
       li.nav-item
         = link_to 'New Event', new_event_path, class: "nav-link"
       li.nav-item
@@ -15,6 +14,3 @@
     - else
       li.nav-item
         = link_to "Sign In", new_user_session_path, class: "nav-link", id: "Sign in"
-
-
-
