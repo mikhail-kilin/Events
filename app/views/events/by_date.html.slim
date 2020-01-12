@@ -1,3 +1,6 @@
 h1.center #{@date.strftime("%d-%m-%Y")}
 
-= render @events
+- if @events.empty?
+  h2 There are no events on this day
+- else
+  = render @events
