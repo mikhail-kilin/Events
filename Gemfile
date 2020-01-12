@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem "rails_12factor", group: :production
 ruby '2.6.3'
 
 gem 'devise'
