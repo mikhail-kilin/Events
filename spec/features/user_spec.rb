@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'sign_in_helper'
 
-describe 'I want work with user, ' do
+describe 'I want work with user,' do
   scenario 'sign in with correct password' do
     user = User.create email: 'user@example.com',
                        password: '12345678'

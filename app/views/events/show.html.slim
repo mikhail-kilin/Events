@@ -11,5 +11,7 @@
 
 - if EventPolicy.new(@event, current_user).can_use?
   = link_to 'Edit', edit_event_path(@event)
-  = " | "
+- else
+  = link_to 'Copy', copy_event_path(@event)
+= " | "
 = link_to "Back", :back

@@ -12,5 +12,9 @@ Rails.application.routes.draw do
           constraints: { month: /[0-9]+/, year: /[0-9]+/ }, as: 'by_month'
       get 'by_month', action: :by_month, as: 'default_by_month'
     end
+
+    member do
+      get 'copy', as: 'copy'
+    end
   end
 end
