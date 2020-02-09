@@ -1,24 +1,7 @@
-# README
+# Дополнительный функционал
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1) Добавлены единоразовые события
+	В задании не было указано, но очевидно, что без них не обойтись
+2) Добавлена возможность забрать в свой календарь чужое событие (кнопка copy, если зайти на страницу чужого события)
+	Мне кажется, что это полезный функционал, потому что если можно посмотреть общий календарь, то пользователь может закхотеть повторить чужое событие.
+	Также если это приложение - общий календарь некой компании, то у разных работников могут быть одинаковый задания/встречи и т.д.
